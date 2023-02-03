@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.studio.system.mapper.StudentMapper">
+
+    <resultMap type="Student" id="StudentResult">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="username" column="nick_name"/>
+        <result property="source" column="source"/>
+        <result property="placeOfOrigin" column="place_of_origin"/>
+        <result property="mathematics" column="mathematics"/>
+        <result property="english" column="english"/>
+        <result property="comprehensive" column="comprehensive"/>
+        <result property="userClass" column="user_class"/>
+        <result property="joining" column="joining"/>
+        <result property="permanent" column="permanent"/>
+        <result property="employmentCity" column="employment_city"/>
+        <result property="employmentUnit" column="employment_unit"/>
+        <result property="employmentTreatment" column="employment_treatment"/>
+        <result property="studentRetain0" column="student_retain0"/>
+        <result property="studentRetain1" column="student_retain1"/>
+        <result property="studentRetain2" column="student_retain2"/>
+    </resultMap>
+
+    <sql id="selectStudentVo">
+        SELECT sys_user.nick_name,
+               student.id,
+               student.user_id,
+               student.source,
+               student.place_of_origin,
+               student.mathematics,
+               student.english,
+               student.comprehensive,
+               student.user_class,
+               student.joining,
+               student.permanent,
+               student.employment_city,
+               student.employment_unit,
+               student.employment_treatment,
+               student.student_retain0,
+               student.student_retain1,
+               student.student_retain2
+        FROM student
+                 INNER JOIN
+             sys_user
+             ON
+                 student.id = sys_user.user_id</sql>
+
+    <select id="selectStudentList" parameterType="Student" resultMap="StudentResult">
+        <include refid="selectStudentVo"/>
+        <where>
+            <if test="userId != null ">and user_id = #{userId}</if>
+            <if test="source != null ">and source = #{source}</if>
+            <if test="placeOfOrigin != null ">and place_of_origin = #{placeOfOrigin}</if>
+            <if test="mathematics != null ">and mathematics = #{mathematics}</if>
+            <if test="english != null ">and english = #{english}</if>
+            <if test="comprehensive != null ">and comprehensive = #{comprehensive}</if>
+            <if test="userClass != null  and userClass != ''">and user_class = #{userClass}</if>
+            <if test="joining != null ">and joining = #{joining}</if>
+            <if test="permanent != null ">and permanent = #{permanent}</if>
+            <if test="employmentCity != null  and employmentCity != ''">and employment_city = #{employmentCity}</if>
+            <if test="employmentUnit != null  and employmentUnit != ''">and employment_unit = #{employmentUnit}</if>
+            <if test="employmentTreatment != null  and employmentTreatment != ''">and employment_treatment =
+                #{employmentTreatment}
+            </if>
+            <if test="username != null  and username != ''">and sys_user.nick_name = #{username}</if>
+            <if test="studentRetain0 != null  and studentRetain0 != ''">and student_retain0 = #{studentRetain0}</if>
+            <if test="studentRetain1 != null  and studentRetain1 != ''">and student_retain1 = #{studentRetain1}</if>
+            <if test="studentRetain2 != null  and studentRetain2 != ''">and student_retain2 = #{studentRetain2}</if>
+        </where>
+    </select>
+
+    <select id="selectStudentById" parameterType="Long" resultMap="StudentResult">
+        <include refid="selectStudentVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertStudent" parameterType="Student" useGeneratedKeys="true" keyProperty="id">
+        insert into student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="source != null">source,</if>
+            <if test="placeOfOrigin != null">place_of_origin,</if>
+            <if test="mathematics != null">mathematics,</if>
+            <if test="english != null">english,</if>
+            <if test="comprehensive != null">comprehensive,</if>
+            <if test="userClass != null">user_class,</if>
+            <if test="joining != null">joining,</if>
+            <if test="permanent != null">permanent,</if>
+            <if test="employmentCity != null">employment_city,</if>
+            <if test="employmentUnit != null">employment_unit,</if>
+            <if test="employmentTreatment != null">employment_treatment,</if>
+            <if test="studentRetain0 != null">student_retain0,</if>
+            <if test="studentRetain1 != null">student_retain1,</if>
+            <if test="studentRetain2 != null">student_retain2,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="source != null">#{source},</if>
+            <if test="placeOfOrigin != null">#{placeOfOrigin},</if>
+            <if test="mathematics != null">#{mathematics},</if>
+            <if test="english != null">#{english},</if>
+            <if test="comprehensive != null">#{comprehensive},</if>
+            <if test="userClass != null">#{userClass},</if>
+            <if test="joining != null">#{joining},</if>
+            <if test="permanent != null">#{permanent},</if>
+            <if test="employmentCity != null">#{employmentCity},</if>
+            <if test="employmentUnit != null">#{employmentUnit},</if>
+            <if test="employmentTreatment != null">#{employmentTreatment},</if>
+            <if test="studentRetain0 != null">#{studentRetain0},</if>
+            <if test="studentRetain1 != null">#{studentRetain1},</if>
+            <if test="studentRetain2 != null">#{studentRetain2},</if>
+        </trim>
+    </insert>
+
+    <update id="updateStudent" parameterType="Student">
+        update student
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="source != null">source = #{source},</if>
+            <if test="placeOfOrigin != null">place_of_origin = #{placeOfOrigin},</if>
+            <if test="mathematics != null">mathematics = #{mathematics},</if>
+            <if test="english != null">english = #{english},</if>
+            <if test="comprehensive != null">comprehensive = #{comprehensive},</if>
+            <if test="userClass != null">user_class = #{userClass},</if>
+            <if test="joining != null">joining = #{joining},</if>
+            <if test="permanent != null">permanent = #{permanent},</if>
+            <if test="employmentCity != null">employment_city = #{employmentCity},</if>
+            <if test="employmentUnit != null">employment_unit = #{employmentUnit},</if>
+            <if test="employmentTreatment != null">employment_treatment = #{employmentTreatment},</if>
+            <if test="studentRetain0 != null">student_retain0 = #{studentRetain0},</if>
+            <if test="studentRetain1 != null">student_retain1 = #{studentRetain1},</if>
+            <if test="studentRetain2 != null">student_retain2 = #{studentRetain2},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStudentById" parameterType="Long">
+        delete
+        from student
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteStudentByIds" parameterType="String">
+        delete from student where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

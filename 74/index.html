@@ -1,0 +1,275 @@
+﻿<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>index</title>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<link rel="stylesheet" href="css/comon0.css">
+	<script src="js/js.js"></script>
+</head>
+
+<body>
+<div class="loading">
+	<div class="loadbox"><img src="images/loading.gif"> 页面加载中...</div>
+</div>
+<div class="head">
+	<h1>杨智勇重庆市首席技能大师工作室</h1>
+	<div class="time" id="showTime">2019年12月05日16时16分54秒</div>
+	<script>
+		var t = null;
+		t = setTimeout(time, 1000);//開始运行
+		function time() {
+			clearTimeout(t);//清除定时器
+			dt = new Date();
+			var y = dt.getFullYear();
+			var mt = dt.getMonth() + 1;
+			var day = dt.getDate();
+			var h = dt.getHours();//获取时
+			var m = dt.getMinutes();//获取分
+			var s = dt.getSeconds();//获取秒
+			var t = null;
+			document.getElementById("showTime").innerHTML = y + "年" + Appendzero(mt) + "月" + Appendzero(day) + "日" + Appendzero(h) + "时" + Appendzero(m) + "分" + Appendzero(s) + "秒";
+
+			function Appendzero(obj) {
+				if (obj < 10) return "0" + "" + obj;
+				else return obj;
+			}
+
+			t = setTimeout(time, 1000); //设定定时器，循环运行
+		}
+	</script>
+</div>
+<div class="mainbox">
+	<ul class="clearfix">
+		<li>
+			<div class="boxall" style="height: calc(15% - .15rem)">
+				<ul class="row h100 row1">
+					<li class="col-4">
+						<div class="bar1"><img src="images/icon1.png">
+							<h3><span>项目数量</span>143个</h3>
+						</div>
+					</li>
+					<li class="col-4">
+						<div class="bar1"><img src="images/icon4.png">
+							<h3><span>老师人数</span>16人</h3>
+						</div>
+					</li>
+					<li class="col-4">
+						<div class="bar1"><img src="images/icon5.png">
+							<h3><span>学生人数
+									</span>120人</h3>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="boxall" style="height: calc(43% - .15rem)">
+
+				<ul class="sec h100">
+					<li>
+						<div>
+							<p><img src="images/icon4.png">企业项目</p>
+							<div class="barnav" style="display: flex;
+    align-items: center;">
+								<div class="bar2"><span style="width:50%;"></span></div>
+								<span>506000元</span></div>
+
+						</div>
+
+						<div>
+							<div class="zaf">
+								<p>同比</p>
+								<p><span>10<i>%</i></span><img src="images/up.png"></p>
+							</div>
+						</div>
+					</li>
+
+					<li>
+						<div>
+							<p><img src="images/icon5.png">学校项目</p>
+
+							<div class="barnav" style="display: flex;
+    align-items: center;">
+								<div class="bar2"><span style="width:35%;"></span></div>
+								<span>354200元</span></div>
+						</div>
+
+						<div>
+							<div class="zaf">
+								<p>同比</p>
+								<p><span>24<i>%</i></span><img src="images/up.png"></p>
+							</div>
+						</div>
+					</li>
+
+					<li>
+						<div>
+							<p><img src="images/icon6.png">其他项目</p>
+							<div class="barnav" style="display: flex;
+    align-items: center;">
+								<div class="bar2"><span style="width:15%;"></span></div>
+								<span>151800元</span></div>
+						</div>
+
+						<div>
+							<div class="zaf">
+								<p>同比</p>
+								<p><span>12<i>%</i></span><img src="images/down.png"></p>
+							</div>
+						</div>
+					</li>
+
+				</ul>
+
+			</div>
+			<div class="boxall" style="height: calc(42% - .15rem)">
+				<div class="alltitle">项目列表</div>
+				<div class="boxnav" id="echarts3"></div>
+			</div>
+		</li>
+		<li>
+			<div class="boxall" style="height: calc(20% - .15rem)">
+				<ul class="row h100 clearfix">
+					<li class="col-6">
+						<div class="sqzs h100">
+							<p>项目收入 ( 元 )<span style="font-size: 14px"></span></p>
+							<h1>1012000</h1>
+						</div>
+					</li>
+					<li class="col-6">
+						<ul class="row h100 clearfix">
+							<li class="col-4">
+								<div class="tit01">企业项目</div>
+								<div class="piebox" id="pe01"></div>
+							</li>
+							<li class="col-4">
+								<div class="tit01">学校项目</div>
+								<div class="piebox" id="pe02"></div>
+							</li>
+							<li class="col-4">
+								<div class="tit01">其他项目</div>
+								<div class="piebox" id="pe03"></div>
+							</li>
+						</ul>
+
+					</li>
+				</ul>
+			</div>
+			<div class="boxall" style="height: calc(38% - .15rem)">
+				<div class="boxnav h100" id="echarts1"></div>
+			</div>
+			<div class="boxall" style="height: calc(42% - .15rem)">
+				<div class="alltitle">技能比赛</div>
+				<div class="boxnav" id="echarts2"></div>
+			</div>
+
+		</li>
+		<li>
+
+			<div class="boxall" style="height: calc(15% - .15rem)">
+
+				<ul class="row h100 row1">
+					<li class="col-4">
+						<div class="bar1 bar2"><img src="images/icon7.png">
+							<h3><span>授权专利
+									</span>31项</h3>
+						</div>
+					</li>
+					<li class="col-4">
+						<div class="bar1 bar2"><img src="images/icon8.png">
+							<h3><span>获奖总数
+									</span>320次</h3>
+						</div>
+					</li>
+					<li class="col-4">
+						<div class="bar1 bar2"><img src="images/icon9.png">
+							<h3 style="display: flex;align-items: center;flex-direction: column;"><span>软件著作权
+									</span>74个</h3>
+						</div>
+					</li>
+				</ul>
+
+
+			</div>
+			<div class="boxall" style="height: calc(43% - .15rem)">
+				<div class="alltitle">学生能力趋向</div>
+				<div class=" boxnav" id="lastecharts">
+				</div>
+
+			</div>
+			<div class="boxall" style="height: calc(42% - .15rem)">
+				<div class="alltitle">学生获奖数量排行</div>
+				<div class=" boxnav paim">
+					<ul class="h100">
+						<li>
+							<span>1</span>
+							<div class="pmnav">
+								<p>杜春林</p>
+								<div class="pmbar"><span style="width:100%"></span><i>8</i></div>
+							</div>
+						</li>
+						<li>
+							<span>2</span>
+							<div class="pmnav">
+								<p>胡泽民</p>
+								<div class="pmbar"><span style="width:92%"></span><i>7</i></div>
+							</div>
+						</li>
+						<li>
+							<span>3</span>
+							<div class="pmnav">
+								<p>冉稀</p>
+								<div class="pmbar"><span style="width:90%"></span><i>6</i></div>
+							</div>
+						</li>
+						<li>
+							<span>4</span>
+							<div class="pmnav">
+								<p>陈福建</p>
+								<div class="pmbar"><span style="width:88%"></span><i>5</i></div>
+							</div>
+						</li>
+						<li>
+							<span>5</span>
+							<div class="pmnav">
+								<p>伍皓</p>
+								<div class="pmbar"><span style="width:86%"></span><i>5</i></div>
+							</div>
+						</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+		</li>
+	</ul>
+</div>
+
+<script>
+	$(document).ready(function () {
+		var arr = [];
+		var max;
+		$(".paim li i").each(function () {
+			arr.push($(this).text());
+		})
+		//alert(arr)
+		max = Math.max.apply(null, arr);
+
+		$(".paim .pmbar span").each(function () {
+			var i = $(this).parents("li").index()
+			w = arr[i] / max * 100;
+			sw = w.toFixed(0) + '%'
+
+			$(this).css({width: sw})
+		})
+
+	})
+</script>
+
+
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script language="JavaScript" src="js/js.js"></script>
+
+</body>
+</html>

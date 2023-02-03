@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.studio.system.mapper.AchievementMapper">
+
+    <resultMap type="Achievement" id="AchievementResult">
+        <result property="id" column="id"/>
+        <result property="type" column="type"/>
+        <result property="name" column="name"/>
+        <result property="time" column="time"/>
+        <result property="content" column="content"/>
+        <result property="author" column="author"/>
+        <result property="images" column="images"/>
+        <result property="files" column="files"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="selectAchievementVo">
+        select id,
+               type,
+               name, time, content, author, images, files, del_flag, create_by, create_time, update_by, update_time, remark
+        from achievement
+    </sql>
+
+    <select id="selectAchievementList" parameterType="Achievement" resultMap="AchievementResult">
+        <include refid="selectAchievementVo"/>
+        <where>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="type != null  and type != ''">and type = #{type}</if>
+            <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
+            <if test="time != null ">and time = #{time}</if>
+            <if test="content != null  and content != ''">and content = #{content}</if>
+            <if test="author != null  and author != ''">and author = #{author}</if>
+            <if test="delFlag != null  and delFlag != ''">and del_flag = #{delFlag}</if>
+        </where>
+    </select>
+
+    <select id="selectAchievementById" parameterType="Long" resultMap="AchievementResult">
+        <include refid="selectAchievementVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertAchievement" parameterType="Achievement" useGeneratedKeys="true" keyProperty="id">
+        insert into achievement
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null and type != ''">type,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="time != null">time,</if>
+            <if test="content != null">content,</if>
+            <if test="author != null">author,</if>
+            <if test="images != null">images,</if>
+            <if test="files != null">files,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="time != null">#{time},</if>
+            <if test="content != null">#{content},</if>
+            <if test="author != null">#{author},</if>
+            <if test="images != null">#{images},</if>
+            <if test="files != null">#{files},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateAchievement" parameterType="Achievement">
+        update achievement
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="author != null">author = #{author},</if>
+            <if test="images != null">images = #{images},</if>
+            <if test="files != null">files = #{files},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="deleteAchievementById" parameterType="Long">
+        update achievement
+        set del_flag=1
+        where id = #{id}
+          and del_flag = 0
+    </update>
+
+    <update id="deleteAchievementByIds" parameterType="String">
+        update achievement set del_flag=1 where del_flag=0 and id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+</mapper>
